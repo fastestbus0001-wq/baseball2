@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#081510">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="YaKyoLife - 棒球人生模擬器">
+<title>YaKyoLife - 棒球人生模擬器</title>
+<meta name="description" content="從高中三大賽到名人堂，一場種子化的台灣棒球員生涯模擬。選秀、旅外、國際賽、傷病、感情、引退——每一個決定都算數。">
+<link rel="canonical" href="https://www.yakyolife.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="YaKyoLife">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:url" content="https://www.yakyolife.com/">
+<meta property="og:title" content="YaKyoLife - 棒球人生模擬器">
+<meta property="og:description" content="從高中三大賽到名人堂，一場種子化的台灣棒球員生涯模擬。選秀、旅外、國際賽、傷病、感情、引退——每一個決定都算數。">
+<meta property="og:image" content="https://www.yakyolife.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="YaKyoLife 棒球人生模擬器">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="YaKyoLife - 棒球人生模擬器">
+<meta name="twitter:description" content="從高中三大賽到名人堂，一場種子化的台灣棒球員生涯模擬。選秀、旅外、國際賽、傷病、感情、引退——每一個決定都算數。">
+<meta name="twitter:image" content="https://www.yakyolife.com/og.png">
+<!-- favicon: bare full-bleed ball (owner request; matches the pre-logo-system tab icon).
+     The dark-bg 3c app icon stays on apple-touch-icon and the PWA manifest. -->
+<link rel="icon" type="image/png" href="assets/favicon-64.png">
+<link rel="apple-touch-icon" href="assets/app-icon-180.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=IBM+Plex+Mono:wght@500;700&family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="start">
+  <div class="wrap">
+    <h1 id="logo-tap" class="lockup">
+      <img class="wm-img" src="assets/wordmark-cream.png" alt="YaKyoLife" decoding="async">
+      <span class="lockup-sub"><i></i><em>棒球人生模擬器</em><i></i></span>
+    </h1>
+    <p class="sub">高中三年養成 → 選秀・旅日・旅美 → 國際賽 → 衰退與引退。每一顆骰子都算數。</p>
+    <div class="field"><label for="in-name">球員資料</label>
+      <div class="player-id-input">
+        <input id="in-name" maxlength="10" placeholder="姓名" aria-label="球員姓名" autocomplete="off">
+        <div class="jersey-input"><span aria-hidden="true">#</span><input id="in-number" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" placeholder="背號" aria-label="背號" autocomplete="off"></div>
+      </div>
+    </div>
+    <div class="field"><label>守位</label>
+      <div class="seg" id="seg-pos">
+        <button data-v="P" class="on">投手</button><button data-v="C">捕手</button>
+        <button data-v="IF">內野手</button><button data-v="OF">外野手</button>
+      </div></div>
+    <button class="btn main" style="margin-top:28px" id="btn-start">開始生涯 ▸ 高一春天</button>
+    <!-- Display preferences sit apart from the career choices above and are collapsed by
+         default: none of them affect the run, and all three are also reachable from the
+         in-game menu. Native <details> so keyboard and screen-reader behaviour come free. -->
+    <details id="fld-display">
+      <summary>顯示設定<span class="sum" id="disp-sum"></span></summary>
+      <div id="disp-body">
+        <div class="field"><label>佈景主題</label>
+          <div class="seg two" id="seg-theme">
+            <button data-t="a" class="on">深綠記分板</button><button data-t="b">電子看板</button>
+            <button data-t="c">報紙版面</button><button data-t="d">現代儀表板</button>
+          </div></div>
+        <div class="field" id="fld-big"><label>字級</label>
+          <div class="seg" id="seg-big">
+            <button data-b="0" class="on">標準</button><button data-b="1">大字</button>
+          </div></div>
+        <div class="field" id="fld-ui"><label>介面版型</label>
+          <div class="seg two" id="seg-ui">
+            <button data-u="0" class="on">電腦版</button><button data-u="1">手機版</button>
+          </div></div>
+      </div>
+    </details>
+    <p class="seedline">世界種子
+      <input id="seed-show" maxlength="24">
+      · <a href="#" id="seed-re">換一個</a><br>相同種子＋相同選擇＝相同人生（可直接輸入朋友的種子碼）</p>
+    <div id="community"><a href="https://discord.gg/UnDYxFtz4U" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">💬</span>加入 Discord 社群</a></div>
+    <footer style="text-align:center;margin-top:22px;color:var(--dim);font-size:12px">Produced by <a href="https://www.threads.com/@mr.themost" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none">最先生 Mr.TheMost</a></footer>
+    <!-- version lives in the quiet bottom info band, mirroring the in-game sidebar's SEED+version group -->
+    <div id="ver-badge" style="text-align:center;margin-top:6px;font-size:10px;letter-spacing:1px;color:var(--dim);opacity:.55;font-family:monospace">v1.4.7</div>
+  </div>
+</div>
+<div id="app">
+  <aside id="tl-side"><div id="tl-in">
+    <div class="tl-brand"><img class="wm-img" src="assets/wordmark-cream.png" alt="YaKyoLife"><span class="sub">棒球人生模擬器</span></div>
+    <div id="tl-list"></div>
+    <div class="tl-seed">SEED <b id="tl-seed"></b><span class="tl-ver" id="tl-ver"></span></div>
+  </div></aside>
+  <div id="mid">
+    <header id="board" style="display:none">
+      <div id="bd-top">
+        <div id="bd-num"><span>NO.</span><b id="bd-jersey">0</b></div>
+        <div id="bd-id"><div id="bd-name"></div><div id="bd-role"></div></div>
+        <div id="bd-team"></div><span id="bd-tj"></span>
+        <button id="btn-menu" title="選單" aria-label="選單"><i></i><i></i><i></i></button>
+      </div>
+      <div id="bd-grid">
+        <div class="bd-cell"><b id="bd-age">16</b><span>年齡</span></div>
+        <div class="bd-cell"><b id="bd-year">2026</b><span>年份</span></div>
+        <div class="bd-cell"><b id="bd-ovr">30</b><span>綜合</span></div>
+        <div class="bd-cell" id="bd-sal-cell" tabindex="0"><b id="bd-sal">0</b><span id="bd-sal-lbl">生涯薪(萬)</span><i class="bd-tip" id="bd-sal-tip"></i></div>
+        <button id="bd-more" aria-expanded="false" aria-controls="bd-detail" title="詳情"><span class="lb">詳情</span><i class="chev"></i></button>
+      </div>
+      <div id="bd-detail" data-tab="h"></div>
+      <div id="lamps">
+        <span class="lamp" id="lp0"><i></i>季初</span>
+        <span class="lamp" id="lp1"><i></i>賽季中</span>
+        <span class="lamp" id="lp2"><i></i>季末</span>
+      </div>
+      <!-- compact bar only: a hint that the whole bar opens the detail panel, not a control
+           of its own (the tap target is the bar; #bd-more stays for keyboard and AT).
+           It sits directly under the two rows it belongs to and above the year strip, which
+           is separate navigation and is deliberately outside the bar's tap area. -->
+      <div id="bd-hint" aria-hidden="true"><i class="chev"></i></div>
+      <div id="tl-strip"></div>
+    </header>
+    <main id="log"></main>
+    <!-- mobile-only brand sign-off (compact container): the log's tail is the one spot the
+         auto-scroll keeps on screen, so the lockup sits there, above the action strip -->
+    <div id="log-mark" aria-hidden="true"><img class="wm-img" src="assets/wordmark-cream.png" alt="" decoding="async"><span class="sub">棒球人生模擬器</span><span class="ver" id="lm-ver"></span></div>
+  </div>
+  <aside id="act-side"><div id="act-in">
+    <div id="trait-side"><div class="tt">特質</div><div id="trait-tags"></div></div>
+    <button id="act-toggle" style="display:none">⌄ 收合選項</button>
+    <footer id="act" style="display:none"></footer>
+  </div></aside>
+</div>
+<div id="modal"><div id="modal-box"></div></div>
+<div id="alloc-full"><div id="af-inner"><div class="af-head"><span class="af-title" id="af-title"></span><button class="btn" id="af-close">收起</button></div><div id="af-body"></div></div></div>
+<script type="module" src="src/main.js"></script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"89d98ee6af9c425f9eb7290b26a675e2","r":1}' crossorigin="anonymous"></script>
+</body>
+</html>
