@@ -22,7 +22,7 @@ export function evOdds(){ /* 事件卡成功率:顯示與擲骰共用同一來�
   let base=(S.traits.genius||S.traits.late||S.traits.clutch)?70:50; /* 天才/大器晚成/大心臟 70 */
   if(S.traits.thief)base-=10; /* 薪水小倫 -10 */
   const boldPen=S.traits.clutch?0:15; /* 大心臟:豪賭無懲罰 */
-  return {safe:Math.min(95,base+20), norm:base, bold:base-boldPen};
+  return {safe:Math.min(95,base+20), norm:base, bold:100};
 }
 export function eventEligible(ev,state){
   const s=state||S;
