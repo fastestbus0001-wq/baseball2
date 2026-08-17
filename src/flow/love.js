@@ -4,7 +4,7 @@ import {ABL, POS_AB} from '../data/abilities.js?v=1.5.0';
 import {card, choose, board} from '../ui/dom.js?v=1.5.0';
 import {addAb, addAbStat} from '../engine/ability.js?v=1.5.0';
 /* 出廠預設為全虛構人名;玩家可透過隱藏編輯器自訂名單(僅存於玩家本機) */
-export let CHEER=['林曉晴','陳若彤','張沛慈','王詠恩','許昀熙','蘇采蓁','周依潔','郭芷萱'];
+export let CHEER=['曉晴','若彤','沛慈','詠恩','昀熙','采蓁','依潔','芷萱'];
 export const CHEER_DEFAULT=CHEER.slice();
 export let CHEER_SAFE=['馮海莎']; /* 不會變成小三的名單:可交往/結婚,永不出現在外遇人選 */
 export function datePool(){ /* 交往/結婚名單 */
